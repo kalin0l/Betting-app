@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Banner from './Banner'
 import { SportContext } from '../../context'
-import { GrClose } from "react-icons/gr";
+import Modal from '../Modal';
 
 
 function Main() {
@@ -9,7 +9,7 @@ function Main() {
     const [isClicked, setIsClicked] = useState(false);
 
 
-    const { events, setPlacedBets, sports, page, setPage, mainEvents, info, openModal, isModal, setInfo, loading } = React.useContext(SportContext);
+    const { events, setPlacedBets, sports, page, setPage, mainEvents, info, openModal, isModal } = React.useContext(SportContext);
 
     const onHandlePage = (i) => {
         setPage(i)
@@ -41,15 +41,7 @@ function Main() {
     return <main className={`${info ? 'section-center shadow' : 'section-center'}`}>
         <Banner />
         {/* rendering additional information for the past events */}
-        {info && isModal && <div className='modal'>
-            <button className='close-btn' onClick={() => setInfo(false)}><GrClose /></button>
-            <div className='info-section'>
-                <p>{isModal.sport.name}</p>
-                <h1>{isModal.section.name} - {isModal.challenge.name}</h1>
-                <h1>{isModal.name} - Round: {isModal.round_number}</h1>
-                {isModal.home_score !== null && <p>{isModal.home_score.current}:{isModal.away_score.current} - {isModal.status_more}</p>}
-            </div>
-        </div>}
+        {info && <Modal isModal={isModal}/>}
         <section className='sports-section'>
             <div className='sports-tabs'>
                 <button onClick={() => setIsClicked(false)}>Live events</button>
