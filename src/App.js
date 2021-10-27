@@ -7,7 +7,8 @@ import { SportContext } from './context';
 function App() {
   const { loading } = React.useContext(SportContext);
   if (loading) {
-    return <div className='loader'></div>
+    return <div className='loader'>
+    </div>
   };
 
   return <>

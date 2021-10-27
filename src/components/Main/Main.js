@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import Banner from './Banner'
 import { SportContext } from '../../context'
 import Modal from '../Modal';
+import { Transition } from 'react-transition-group';
 
 
 function Main() {
 
     const [isClicked, setIsClicked] = useState(false);
+    
 
 
-    const { events, setPlacedBets, sports, page, setPage, mainEvents, info, openModal, isModal } = React.useContext(SportContext);
+    const { events, setPlacedBets, sports, page, setPage, mainEvents, info,openModal, isModal,inProp } = React.useContext(SportContext);
 
     const onHandlePage = (i) => {
         setPage(i)
@@ -34,14 +36,19 @@ function Main() {
             return newPage
         })
     }
-    
+
 
     let image = 'https://www.thesportsdb.com/images/media/event/thumb/f50pvg1603530695.jpg';
 
     return <main className={`${info ? 'section-center shadow' : 'section-center'}`}>
         <Banner />
         {/* rendering additional information for the past events */}
-        {info && <Modal isModal={isModal}/>}
+        { info &&<Transition in={inProp} timeout={400}>
+
+            {state => (
+                <Modal show={state} isModal={isModal} />
+            )}
+        </Transition>}
         <section className='sports-section'>
             <div className='sports-tabs'>
                 <button onClick={() => setIsClicked(false)}>Live events</button>
@@ -54,7 +61,7 @@ function Main() {
 
                 const { id, status_more: part, start_at: start } = event
                 return <div key={id} className='events-container'>
-                    <div className='league-container' onClick={() => setPlacedBets(sports.data[i])}>
+                    <div className='league-container'>
                         {event.league && <div>{event.league.name}</div>}
                         <div>{start}</div>
                     </div>
@@ -87,7 +94,7 @@ function Main() {
                 let image = 'https://www.thesportsdb.com/images/media/event/thumb/f50pvg1603530695.jpg';
 
                 return <div key={id} className='events-container'>
-                    <div className='league-container' onClick={() => setPlacedBets(events.data[i])}>
+                    <div className='league-container'>
                         {event.league && <div>{event.league.name} </div>}
                         <div>{start}</div>
                     </div>

@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FaReact } from "react-icons/fa";
 import { SportContext } from '../context'
 
 function Header() {
-    const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+    const { loginWithRedirect, logout, user } = useAuth0();
     const { openBets } = React.useContext(SportContext);
 
     

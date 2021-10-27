@@ -1,14 +1,13 @@
 :root {
   --btn-color: rgba(108, 255, 108, 0.8);
-  --backG-color: rgb(160, 160, 160)
+  --backG-color: rgb(160, 160, 160);
 }
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'GT-Walsheim-Pro', Tahoma, Arial, Helvetica, sans-serif;
-  /* overflow: hidden; */
+  font-family: "GT-Walsheim-Pro", Tahoma, Arial, Helvetica, sans-serif;
 }
 
 .section-grid {
@@ -19,32 +18,6 @@ body {
   grid-template-rows: 100px 1fr 1fr 50px;
 }
 
-.undermaintenance-page {
-  display: flex;
-}
-
-.undermaintenance-page div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50vw;
-  height: 100vh;
-}
-
-.undermaintenance-page .left-side {
-  display: flex;
-  flex-direction: column;
-  background-color: #e4e4e4;
-  font-size: 7rem;
-}
-
-.undermaintenance-page .right-side {
-  display: flex;
-  flex-direction: column;
-  background-color: #4E454A;
-  font-size: 7rem;
-  color: var(--btn-color);
-}
 .right-side button {
   color: black;
   background-color: var(--btn-color);
@@ -97,7 +70,6 @@ body {
   align-items: center;
   height: 100%;
   border-bottom: 1px solid black;
-
 }
 .header-buttons div {
   display: flex;
@@ -106,15 +78,16 @@ body {
 }
 
 .loader {
+
   position: absolute;
   top: 35%;
   left: 40%;
-  border-top: 16px solid #3498db;
-  border-bottom: 16px solid #3498db;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+  border: 16px solid #7e7a7d;
+  border-top: 16px solid rgba(138, 223, 2, 0.8);
+  width: 150px;
+  height: 150px;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -126,7 +99,6 @@ body {
     transform: rotate(360deg);
   }
 }
-
 
 .header-buttons button {
   color: black;
@@ -180,8 +152,6 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-
-
 }
 
 .btn-container button {
@@ -194,7 +164,6 @@ h4 {
   font-weight: 900;
   cursor: pointer;
   z-index: 100;
-
 }
 
 .event-container {
@@ -205,14 +174,6 @@ h4 {
   width: 100%;
   height: 100%;
 }
-
-/* .event-container div {
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-} */
 
 .banner-arrows {
   display: flex;
@@ -261,20 +222,17 @@ h4 {
   box-shadow: inset 0 0 490px black;
 }
 
-
 .date-country-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .home-away-container {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .sports-section {
@@ -303,7 +261,6 @@ h4 {
   font-weight: 900;
   border: 1px solid black;
   z-index: 0;
-
 }
 
 .sports-tabs span {
@@ -312,7 +269,7 @@ h4 {
   left: 0;
   bottom: 0;
   height: 3px;
-  content: '';
+  content: "";
   width: 94px;
   z-index: 1;
 }
@@ -323,7 +280,7 @@ h4 {
   left: 96px;
   bottom: 0;
   height: 3px;
-  content: '';
+  content: "";
   width: 94px;
   z-index: 1;
 }
@@ -418,7 +375,8 @@ div .link {
 .pagination-container .activePage {
   background-color: orangered;
 }
-.pagination-container .prev-btn,.pagination-container .next-btn {
+.pagination-container .prev-btn,
+.pagination-container .next-btn {
   background-color: var(--btn-color);
   color: #000;
   border-radius: 5px;
@@ -442,7 +400,6 @@ div .link {
   font-weight: 900;
   color: #000;
 }
-
 
 .betslip {
   background-color: #726b70;
@@ -471,7 +428,6 @@ div .link {
 
 .tabs-container p:hover {
   color: var(--btn-color);
-
 }
 
 .tabs-container p::after {
@@ -483,7 +439,6 @@ div .link {
   height: 3px;
   content: "";
   background-color: var(--btn-color);
-
 }
 
 .betslip-btn {
@@ -531,7 +486,6 @@ div .link {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
 }
 
 .clear-all-btn {
@@ -556,7 +510,6 @@ div .link {
   height: 40px;
   width: 40px;
   font-size: 32px;
-
 }
 
 .selection-coef {
@@ -588,14 +541,12 @@ div .link {
   background-color: #e4e4e4;
   background-image: url("https://images.unsplash.com/photo-1459865264687-595d652de67e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80");
   width: 100%;
-
 }
 
 .event-heading {
-  background-color: #4E454A;
+  background-color: #4e454a;
   border-radius: 3px;
   border: 1px solid black;
-
 }
 
 .image-container {
@@ -604,7 +555,6 @@ div .link {
   flex-direction: column;
   align-items: center;
   margin-right: 50px;
-
 }
 
 .image-container img {
@@ -635,14 +585,12 @@ div .link {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .markets-container {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .market-info button {
@@ -657,12 +605,13 @@ div .link {
 }
 
 .market-info h3 {
-  background-color: #4E454A;
+  background-color: #4e454a;
   color: #fff;
   padding: 10px;
 }
 .shadow {
-  background-color: rgba(0, 0, 0, .35);
+  background-color: rgba(0, 0, 0, 0.35);
+  transition: all 0.5s ease-in-out;
 }
 .modal {
   z-index: 999;
@@ -671,6 +620,42 @@ div .link {
   left: 25%;
   width: 100%;
   height: 100%;
+}
+.openModal {
+  
+  animation: openmodal 0.4s ease-in-out forwards;
+}
+.closeModal {
+ 
+  animation: closemodal 0.4s ease-in-out forwards;
+}
+@keyframes openmodal {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes closemodal {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-100%);
+  }
 }
 .info-section {
   display: flex;

@@ -3,11 +3,18 @@ import { GrClose } from "react-icons/gr";
 import { SportContext } from '../context';
 
 
-const Modal = ({isModal}) => {
-    const {setInfo} = React.useContext(SportContext);
+const Modal = ({isModal,show}) => {
+    const {setInfo,setInProp,inProp} = React.useContext(SportContext);
+    const closingModal = () => {
+        setInProp(!inProp);
+        setTimeout(() => {
+            setInfo(false)
+        },500)
+    }
+    console.log(show);
     return (
-        <div className='modal'>
-        <button className='close-btn' onClick={() => setInfo(false)}><GrClose /></button>
+        <div className={`${show ==='entered' ? ' modal openModal' : 'closeModal'}`}>
+        <button className='close-btn' onClick={closingModal}><GrClose /></button>
        {isModal && <div className='info-section'>
             <p>{isModal.sport.name}</p>
             <h1>{isModal.section.name} - {isModal.challenge.name}</h1>
@@ -16,5 +23,6 @@ const Modal = ({isModal}) => {
         </div>}
     </div>
     )
+    
 }
 export default Modal;

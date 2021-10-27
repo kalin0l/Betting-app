@@ -23,7 +23,7 @@ export const SportsProvider = ({ children }) => {
     const getLocalStorageStake = () => {
         const stake = localStorage.getItem('stake');
         if (stake) {
-            return JSON.parse(stake);
+            return JSON.parse([stake]);
         } else {
             return [];
         }
@@ -46,6 +46,7 @@ export const SportsProvider = ({ children }) => {
         newBalance: 100,
     })
     const [page, setPage] = useState(0);
+    const [inProp,setInProp] = useState(false);
 
 
     const year = new Date().getFullYear();
@@ -73,8 +74,9 @@ export const SportsProvider = ({ children }) => {
     }
     // opening the additional info of the past event
     const openModal = (i) => {
-        setInfo(true);
+        setInfo(!info);
         setIsModal(sports.data[i])
+        setInProp(!inProp);
 
     }
     // clearing the bet selection from the bet slip
@@ -211,6 +213,8 @@ export const SportsProvider = ({ children }) => {
         openModal,
         isModal,
         clearOpenBets,
+        inProp,
+        setInProp
 
     }}>{children}</SportContext.Provider>
 }
