@@ -47,6 +47,7 @@ export const SportsProvider = ({ children }) => {
     })
     const [page, setPage] = useState(0);
     const [inProp,setInProp] = useState(false);
+    const [counter, setCounter] = useState(0)
 
 
     const year = new Date().getFullYear();
@@ -70,7 +71,8 @@ export const SportsProvider = ({ children }) => {
             placedOdds: [],
             newBalance: 100,
             placedStake: 0,
-        })
+        });
+        setCounter(0)
     }
     // opening the additional info of the past event
     const openModal = (i) => {
@@ -214,7 +216,9 @@ export const SportsProvider = ({ children }) => {
         isModal,
         clearOpenBets,
         inProp,
-        setInProp
+        setInProp,
+        setCounter,
+        counter,
 
     }}>{children}</SportContext.Provider>
 }
