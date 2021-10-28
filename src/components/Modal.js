@@ -11,7 +11,6 @@ const Modal = ({isModal,show}) => {
             setInfo(false)
         },500)
     }
-    console.log(show);
     return (
         <div className={`${show ==='entered' ? ' modal openModal' : 'closeModal'}`}>
         <button className='close-btn' onClick={closingModal}><GrClose /></button>

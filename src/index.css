@@ -372,7 +372,7 @@ div .link {
   padding: 5px;
   border-radius: 2px;
 }
-.pagination-container .activePage {
+.pagination-container .activePage,.active-btn {
   background-color: orangered;
 }
 .pagination-container .prev-btn,

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { SportContext } from '../context'
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from 'react/cjs/react.development';
 
 const Aside = () => {
 
@@ -34,18 +33,18 @@ const Aside = () => {
         openBets.newBalance < stake ? setNotEnough(true) : setNotEnough(false);
 
     }
-    console.log(openBets.placedEvents,notEnough)
-    // const getEvents = () => {
-    //     const numberOfEvents = localStorage.getItem('numberOfEvents');
-    //     if (numberOfEvents > 3) {
-    //         return;
-    //     } else {
-    //         return JSON.parse(numberOfEvents);
-    //     }
-    // }
-    // useEffect(() => {
-    //     localStorage.setItem('numberOfEvents', JSON.stringify(openBets.placedEvents.length))
-    // }, [openBets.placedEvents])
+    
+    const getEvents = () => {
+        const numberOfEvents = localStorage.getItem('numberOfEvents');
+        if (numberOfEvents > 9) {
+            return;
+        } else {
+            return JSON.parse(numberOfEvents);
+        }
+    }
+    useEffect(() => {
+        localStorage.setItem('numberOfEvents', JSON.stringify(openBets.placedOdds.length))
+    }, [openBets.placedOdds])
 
 
     return <aside className={`${info ? 'betslip-container shadow' : 'betslip-container'}`}>
@@ -57,7 +56,7 @@ const Aside = () => {
                 </p>
 
                 <p onClick={() => setListOfBets(true)} >
-                    Open Bets ({openBets.placedEvents.length < 0 || openBets.placedEvents.events >= 8 ? counter : counter})
+                    Open Bets ({openBets.placedEvents.length <= 0 || openBets.placedEvents.events >= 8 ? getEvents() : getEvents() + 1})
                 </p>
             </div>
             {/* rendering open bets */}
@@ -82,7 +81,7 @@ const Aside = () => {
             </div>}
             {!placedBets.main_odds && <div className='empty'>No odds for now!</div>}
             {!listOfBets && !notEnough && placedBets && placedBets.main_odds && <div className='odd-btn-container'>
-                {placedBets.main_odds && placedBets.main_odds.outcome_1 && <button onClick={setOdds(placedBets.main_odds.outcome_1['value'])} className='link'>{placedBets.main_odds.outcome_1['value']}</button>}
+                {placedBets.main_odds && placedBets.main_odds.outcome_1 && <button  onClick={setOdds(placedBets.main_odds.outcome_1['value'])} className='link'>{placedBets.main_odds.outcome_1['value']}</button>}
                 {placedBets.main_odds && placedBets.main_odds.outcome_X && <button onClick={setOdds(placedBets.main_odds.outcome_X['value'])} className='link'>{placedBets.main_odds.outcome_X['value']}</button>}
                 {placedBets.main_odds && placedBets.main_odds.outcome_2 && <button onClick={setOdds(placedBets.main_odds.outcome_2['value'])} className='link'>{placedBets.main_odds.outcome_2['value']}</button>}
             </div>}
