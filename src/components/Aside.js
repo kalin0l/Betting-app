@@ -34,17 +34,18 @@ const Aside = () => {
 
     }
     
+    console.log(openBets.placedEvents.length === 0)
     const getEvents = () => {
-        const numberOfEvents = localStorage.getItem('numberOfEvents');
-        if (numberOfEvents > 9) {
-            return;
-        } else {
+        const numberOfEvents = sessionStorage.getItem('numberOfEvents') ;
+        if (numberOfEvents >= 8) {
             return JSON.parse(numberOfEvents);
+        } else {
+            return JSON.parse(8);
         }
     }
     useEffect(() => {
-        localStorage.setItem('numberOfEvents', JSON.stringify(openBets.placedOdds.length))
-    }, [openBets.placedOdds])
+        sessionStorage.setItem('numberOfEvents', JSON.stringify(openBets.placedEvents.length))
+    }, [openBets.placedEvents.length])
 
 
     return <aside className={`${info ? 'betslip-container shadow' : 'betslip-container'}`}>
@@ -56,7 +57,7 @@ const Aside = () => {
                 </p>
 
                 <p onClick={() => setListOfBets(true)} >
-                    Open Bets ({openBets.placedEvents.length <= 0 || openBets.placedEvents.events >= 8 ? getEvents() : getEvents() + 1})
+                    Open Bets ({openBets.placedEvents.length === 8 ? getEvents() : counter})
                 </p>
             </div>
             {/* rendering open bets */}
@@ -79,13 +80,13 @@ const Aside = () => {
             {!listOfBets && placedBets && placedBets.id && <div className='bet-container'>
                 <h3>{placedBets.home_team.name} vs {placedBets.away_team.name}</h3>
             </div>}
-            {!placedBets.main_odds && <div className='empty'>No odds for now!</div>}
+            {!listOfBets && !placedBets.main_odds && <div className='empty'>No odds for now!</div>}
             {!listOfBets && !notEnough && placedBets && placedBets.main_odds && <div className='odd-btn-container'>
                 {placedBets.main_odds && placedBets.main_odds.outcome_1 && <button  onClick={setOdds(placedBets.main_odds.outcome_1['value'])} className='link'>{placedBets.main_odds.outcome_1['value']}</button>}
                 {placedBets.main_odds && placedBets.main_odds.outcome_X && <button onClick={setOdds(placedBets.main_odds.outcome_X['value'])} className='link'>{placedBets.main_odds.outcome_X['value']}</button>}
                 {placedBets.main_odds && placedBets.main_odds.outcome_2 && <button onClick={setOdds(placedBets.main_odds.outcome_2['value'])} className='link'>{placedBets.main_odds.outcome_2['value']}</button>}
             </div>}
-            {notEnough || openBets.newBalance < stake && <p className='error-msg'>Insufficient Funds</p>}
+            {notEnough || openBets.newBalance < stake ? <p className='error-msg'>Insufficient Funds</p> : null}
 
             <div className='betslip-btn'>
                 <button type='submit' className='btn' onClick={decrease}>-</button>
