@@ -28,7 +28,7 @@ export const SportsProvider = ({ children }) => {
             return [];
         }
     }
-   
+    const [isClicked, setIsClicked] = useState(false);
     const [info, setInfo] = useState(false);
     const [isModal, setIsModal] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -47,11 +47,15 @@ export const SportsProvider = ({ children }) => {
     })
     const [page, setPage] = useState(0);
     const [inProp,setInProp] = useState(false);
-    const [counter, setCounter] = useState(0)
+    const [counter, setCounter] = useState(0);
+    const [listOfBets, setListOfBets] = useState(false);
+    const [notEnough,setNotEnough] = useState(false);
+
+
 
 
     const year = new Date().getFullYear();
-    const month = new Date().getMonth();
+    const month = new Date().getMonth() + 1;
     const date = new Date().getDate();
 
     // setting the event data to the localstorage
@@ -116,52 +120,55 @@ export const SportsProvider = ({ children }) => {
         return newEvents;
     }
 
-    const sportsEvents = async () => {
-        setLoading(true);
-        try {
-            const res = await fetch("https://sportscore1.p.rapidapi.com/events/live", {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-key": "e188076ae0msha1822f57c981c74p1d721fjsnfd365b8ac058",
-                    "x-rapidapi-host": "sportscore1.p.rapidapi.com"
-                }
-            });
-            const data = await res.json();
-
-            setLoading(false);
-            setMainEvents(paginate(data.data));
-            setEvents(data);
-
-        } catch (err) {
-            console.log(err);
-        }
-
-    }
+   
     useEffect(() => {
+        const sportsEvents = async () => {
+            setLoading(true);
+            try {
+                const res = await fetch("https://sportscore1.p.rapidapi.com/events/live", {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-key": "e188076ae0msha1822f57c981c74p1d721fjsnfd365b8ac058",
+                        "x-rapidapi-host": "sportscore1.p.rapidapi.com"
+                    }
+                });
+                const data = await res.json();
+    
+                setLoading(false);
+                setMainEvents(paginate(data.data));
+                setEvents(data);
+    
+            } catch (err) {
+                console.log(err);
+            }
+    
+        }
         sportsEvents();
     }, [])
 
 
-    const fetchSports = async () => {
-        try {
-            const res = await fetch(`https://sportscore1.p.rapidapi.com/events/date/${year.toString()}-${month < 10 ? '0' + month.toString() : month.toString()}-${date < 10 ? '0' + (date - 1).toString() : date.toString()}?page=1`, {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "sportscore1.p.rapidapi.com",
-                    "x-rapidapi-key": "e188076ae0msha1822f57c981c74p1d721fjsnfd365b8ac058"
-                }
-            })
-            const data = await res.json();
-            setSports(data);
-        } catch (err) {
-            console.log(err);
-        }
-    }
+   
 
     useEffect(() => {
+        const fetchSports = async () => {
+            try {
+                const res = await fetch(`https://sportscore1.p.rapidapi.com/events/date/${year.toString()}-${month < 10 ? '0' + month.toString() : month.toString()}-${date < 10 ? '0' + (date - 1).toString() : date.toString()}?page=1`, {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "sportscore1.p.rapidapi.com",
+                        "x-rapidapi-key": "e188076ae0msha1822f57c981c74p1d721fjsnfd365b8ac058"
+                    }
+                })
+                const data = await res.json();
+                setSports(data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
         fetchSports();
 
-    }, []);
+    }, [date,month,year]);
 
 
     // slider functionality
@@ -191,6 +198,10 @@ export const SportsProvider = ({ children }) => {
 
 
     return <SportContext.Provider value={{
+        notEnough,
+        setNotEnough,
+        listOfBets,
+        setListOfBets,
         openBets,
         setOpenBets,
         placedBets,
@@ -219,6 +230,8 @@ export const SportsProvider = ({ children }) => {
         setInProp,
         setCounter,
         counter,
+        isClicked,
+        setIsClicked
 
     }}>{children}</SportContext.Provider>
 }
