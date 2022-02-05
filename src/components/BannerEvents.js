@@ -2,7 +2,7 @@ import React from "react";
 import { SportContext } from "../context";
 
 const BannerEvents = () => {
-  const { events, index, setPlacedBets } = React.useContext(SportContext);
+  const { events, index, dispatch } = React.useContext(SportContext);
 
   return (
     <>
@@ -33,7 +33,12 @@ const BannerEvents = () => {
                   <div className="btn-container">
                     <button
                       type="submit"
-                      onClick={() => setPlacedBets(events.data[i])}
+                      onClick={() =>
+                        dispatch({
+                          type: "BANNER_EVENTS",
+                          payload: events.data[i],
+                        })
+                      }
                     >
                       Click here to bet
                     </button>

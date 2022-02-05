@@ -5,13 +5,12 @@ import { SportContext } from '../context'
 
 const LiveEvents = () => {
 
-    const {isClicked,mainEvents,setPlacedBets,events,page} = React.useContext(SportContext);
+    const {isClicked,mainEvents,dispatch,events,page} = React.useContext(SportContext);
     
     return <>
     {!isClicked && mainEvents && mainEvents.length > 0 && mainEvents[page].map((event, i) => {
+
                 const { id, status_more: part, start_at: start } = event
-
-
                 let image = 'https://www.thesportsdb.com/images/media/event/thumb/f50pvg1603530695.jpg';
 
                 return <div key={id} className='events-container'>
@@ -34,7 +33,7 @@ const LiveEvents = () => {
                             </div>
                         </div>
                         <div className='round-container'>
-                            <div className='link' onClick={() => setPlacedBets(events.data[i])}>Click here to bet</div>
+                            <div className='link' onClick={() => dispatch({type:'ADD_TO_BETSLIP',payload:events.data[i]})}>Click here to bet</div>
                         </div>
                     </div>
 

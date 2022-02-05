@@ -4,11 +4,14 @@ import { SportContext } from '../context';
 
 
 const Modal = ({isModal,show}) => {
-    const {setInfo,setInProp,inProp} = React.useContext(SportContext);
+    const {dispatch} = React.useContext(SportContext);
+
     const closingModal = () => {
-        setInProp(!inProp);
+        
+        dispatch({type: 'TO_FALSE_INPROP'});
+
         setTimeout(() => {
-            setInfo(false)
+            dispatch({type: 'TO_FALSE_INFO'})
         },500)
     }
     return (

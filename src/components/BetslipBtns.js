@@ -2,34 +2,26 @@ import React from "react";
 import { SportContext } from "../context";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 const BetslipBtns = () => {
-    const {increase,decrease,openBets,stake,placedBets,listOfBets,clearSelections,clearOpenBets,setOpenBets,setNotEnough,setCounter,odds} = React.useContext(SportContext);
-    const { isAuthenticated } = useAuth0();
+  const {
+    increase,
+    decrease,
+    openBets,
+    stake,
+    placedBets,
+    listOfBets,
+    clearSelections,
+    clearOpenBets,
+    setNotEnough,
+    dispatch,
+  } = React.useContext(SportContext);
+  const { isAuthenticated } = useAuth0();
 
+  const addBet = () => {
+    dispatch({ type: "ADD_BET_TO_OPEN_BETS" });
 
-    const addBet = () => {
-        setOpenBets({
-
-            ...openBets,
-            placedEvents: [...openBets.placedEvents, placedBets],
-            placedOdds: [...openBets.placedOdds, odds],
-            placedStake: [...Object.values(openBets.placedStake),stake],
-            newBalance: openBets.newBalance - stake,
-
-
-        });
-        setCounter((oldCounter) => {
-            let newCounter = oldCounter + 1;
-            if(newCounter >= 8) {
-                newCounter = 8;
-            }
-            return newCounter;
-        });
-        openBets.newBalance < stake ? setNotEnough(true) : setNotEnough(false);
-
-    }
-
+    openBets.newBalance < stake ? setNotEnough(true) : setNotEnough(false);
+  };
 
   return (
     <>
@@ -37,7 +29,11 @@ const BetslipBtns = () => {
         <button type="submit" className="btn" onClick={decrease}>
           -
         </button>
-        <input type="text" value={stake} />
+        {stake < 0 ? (
+          <input type="text" value={0} />
+        ) : (
+          <input type="text" value={stake} />
+        )}
         <button type="submit" className="btn" onClick={increase}>
           +
         </button>

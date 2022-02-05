@@ -5,8 +5,7 @@ import React from "react";
 import BannerEvents from "../BannerEvents";
 
 function Banner() {
-  const { nextSlide, prevSlide, info } =
-    React.useContext(SportContext);
+  const { nextSlide, prevSlide, info } = React.useContext(SportContext);
 
   return (
     <section className={`${info ? "section-banner shadow" : "section-banner"}`}>
