@@ -2,7 +2,7 @@ import React from "react";
 import { SportContext } from "../context";
 
 const SelectedEvents = () => {
-  const { listOfBets, placedBets, openBets, stake, notEnough, dispatch } = React.useContext(SportContext);
+  const { listOfBets, placedBets, newBalance, stake, notEnough, dispatch } = React.useContext(SportContext);
 
   return (
     <>
@@ -59,7 +59,7 @@ const SelectedEvents = () => {
           )}
         </div>
       )}
-      {notEnough || openBets.newBalance < stake ? (
+      {notEnough || newBalance < stake ? (
         <p className="error-msg">Insufficient Funds</p>
       ) : null}
     </>

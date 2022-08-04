@@ -5,14 +5,14 @@ import { SportContext } from '../context';
 const BetslipTabs = () => {
 
 
-    const {openBets,counter,setListOfBets} = React.useContext(SportContext);
+    const {openBets,setListOfBets} = React.useContext(SportContext);
 
     const getEvents = () => {
-        const numberOfEvents = sessionStorage.getItem('numberOfEvents') ;
-        if (numberOfEvents >= 8) {
-            return JSON.parse(numberOfEvents);
+        const numberOfEvents = openBets.placedEvents.length;
+        if (numberOfEvents > 8) {
+            return 8;
         } else {
-            return JSON.parse(8);
+            return numberOfEvents;
         }
     }
 
@@ -22,7 +22,7 @@ const BetslipTabs = () => {
         </p>
 
         <p onClick={() => setListOfBets(true)} >
-            Open Bets ({openBets.placedEvents.length === 8 ? getEvents() : counter})
+            Open Bets ({getEvents()})
         </p>
     </div>
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { SportContext } from "../context";
-import { useAuth0 } from "@auth0/auth0-react";
+import { AuthContext } from "../authContext";
 
 const BetslipBtns = () => {
   const {
@@ -14,13 +14,34 @@ const BetslipBtns = () => {
     clearOpenBets,
     setNotEnough,
     dispatch,
+    odds,
+    newBalance,
   } = React.useContext(SportContext);
-  const { isAuthenticated } = useAuth0();
 
-  const addBet = () => {
-    dispatch({ type: "ADD_BET_TO_OPEN_BETS" });
+  const {user} = React.useContext(AuthContext);
 
-    openBets.newBalance < stake ? setNotEnough(true) : setNotEnough(false);
+  const addBet = async (homeTeam,awayTeam,homeTeamScore,awayTeamScore,stake,selection,id) => {
+    
+    
+    newBalance < stake ? setNotEnough(true) : setNotEnough(false);
+    try {
+      const res = await fetch(`/${id}`,{
+        method:'POST',
+        headers:{
+          "Content-type":"application/json"
+        },
+        body:JSON.stringify({
+          homeTeam,awayTeam,homeTeamScore,awayTeamScore,stake,selection,user:id
+        })
+      })
+      const data = await res.json();
+      dispatch({ type: "STAKE",payload:data.bet.stake })
+      console.log(data.bet);
+      
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   return (
@@ -42,11 +63,9 @@ const BetslipBtns = () => {
         <button
           className="bet-btn"
           type="submit"
-          onClick={addBet}
+          onClick={() => addBet(placedBets.home_team.name,placedBets.away_team.name,placedBets.home_score.current,placedBets.away_score.current,stake,odds,user.userId)}
           disabled={
-            openBets.placedEvents.length >= 8 || openBets.newBalance < stake
-              ? true
-              : !isAuthenticated
+            openBets.placedEvents.length >= 8 || newBalance < stake ? true : !user
           }
         >
           BET

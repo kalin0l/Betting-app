@@ -34,20 +34,23 @@ const reducer = (state, action) => {
   if (action.type === "ADD_TO_BETSLIP") {
     return { ...state, placedBets: action.payload };
   }
+  if (action.type === "STAKE") {
+    return { ...state, newBalance: state.newBalance - action.payload };
+  }
+
   if (action.type === "ADD_BET_TO_OPEN_BETS") {
     return {
       ...state,
       openBets: {
-        ...state.openBets,
-        placedEvents: [...state.openBets.placedEvents, state.placedBets],
-        placedOdds: [...state.openBets.placedOdds, state.odds],
-        placedStake: [
-          ...Object.values(state.openBets.placedStake),
-          state.stake,
-        ],
-        newBalance: state.openBets.newBalance - state.stake,
+        placedEvents: action.payload,
       },
-      counter: state.counter > 8 ? 8 : state.counter + 1,
+    };
+  }
+  if (action.type === "SET_SCORE") {
+    return {
+      ...state,
+      homeTeamScore: action.payload,
+      awayTeamScore: action.payload,
     };
   }
   if (action.type === "SET_1") {
@@ -74,6 +77,34 @@ const reducer = (state, action) => {
   if (action.type === "BANNER_EVENTS") {
     return { ...state, placedBets: action.payload };
   }
+  if (action.type === "CASH_OUT") {
+    return { ...state, newBalance: state.newBalance + action.payload };
+  }
+  if (action.type === "OPEN_DEPOSIT") {
+    return { ...state, isDepositClicked: !state.isDepositClicked };
+  }
+  if (action.type === "DEPOSIT") {
+    const deposits = action.payload;
+    if (typeof deposits === "number") {
+      return { ...state, newBalance: state.newBalance + deposits };
+    }
+    return {
+      ...state,
+      newBalance: deposits.reduce((acc, cur) => acc + cur.deposit, 0),
+    };
+  }
+  // if (action.type === "CLEAR_BET") {
+  //   const id = action.payload;
+  //   const event = state.openBets.placedEvents.filter((ev) => ev._id !== id);
+  //   if (event) {
+  //     return {
+  //       ...state,
+  //       openBets: {
+  //         placedEvents: event,
+  //       },
+  //     };
+  //   }
+  // }
 
   return state;
 };

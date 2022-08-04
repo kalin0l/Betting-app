@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SportContext } from '../context'
 import BetslipTabs from './BetSlipTabs';
 import OpenBets from './OpenBets';
@@ -7,13 +7,7 @@ import BetslipBtns from './BetslipBtns';
 
 const Aside = () => {
 
-    const { openBets, info,  } = React.useContext(SportContext);
-
-    
-    useEffect(() => {
-        sessionStorage.setItem('numberOfEvents', JSON.stringify(openBets.placedEvents.length))
-    }, [openBets.placedEvents.length])
-
+    const {  info } = React.useContext(SportContext);
 
     return <aside className={`${info ? 'betslip-container shadow' : 'betslip-container'}`}>
         <div className='betslip'>
@@ -22,7 +16,7 @@ const Aside = () => {
             {/* rendering open bets */}
            <OpenBets/>
            <SelectedEvents/>
-           <BetslipBtns/>
+          <BetslipBtns/>
         </div>
 
     </aside >

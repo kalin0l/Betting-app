@@ -480,6 +480,10 @@ div .link {
   border-radius: 3px;
   border: none;
 }
+.cash-out-btn{
+  display: flex;
+  justify-content: center;
+}
 
 .bet-container {
   display: flex;
@@ -621,6 +625,58 @@ div .link {
   width: 100%;
   height: 100%;
 }
+.deposit-modal {
+  background-color: grey;
+  z-index: 999;
+  position: fixed;
+  top: 30%;
+  left: 25%;
+  width: 100%;
+  height: 100%;
+  width: 35%;
+  height: 20%;
+  display: flex;
+  flex-flow: column;
+}
+.deposit-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.deposit-modal .deposit-btn {
+  width: 35%;
+  height: 10%;
+  background-color: limegreen;
+  color: #000;
+  margin-top: 10px;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.deposit-modal input {
+  outline: none;
+  padding: 10px;
+}
+.deposit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.close-deposit-btn{
+  position: absolute;
+  top: 0;
+  left: 92.5%;
+  width: 30px;
+  height: 30px;
+  background: rgba(34, 32, 32, 0.4);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
 .openModal {
   
   animation: openmodal 0.4s ease-in-out forwards;
@@ -692,4 +748,10 @@ div .link {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.bet-score{
+  display: flex;
+  justify-content: center;
+  font-weight: 900;
+  margin-bottom: 5px;
 }

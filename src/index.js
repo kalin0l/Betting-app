@@ -1,24 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import SportsProvider from './context'
-import { Auth0Provider } from "@auth0/auth0-react";
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { SportsProvider } from "./context";
+import { AuthProvider } from "./authContext";
+import { CookiesProvider } from "react-cookie";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider
-      domain="dev-dsqy7a4y.eu.auth0.com"
-      clientId="1t7GqXbkl38ZFDIypumccDplb9kSb8yj"
-      redirectUri={window.location.origin}
-    >
+    <CookiesProvider>
       <SportsProvider>
-        <App />
-
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </SportsProvider>
-    </Auth0Provider>
+    </CookiesProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-

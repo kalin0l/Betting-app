@@ -4,50 +4,27 @@ import reducer from "./reducer";
 export const SportContext = React.createContext();
 
 export const SportsProvider = ({ children }) => {
-  const getLocalStorageEvents = () => {
-    const bets = localStorage.getItem("openBets");
-    if (bets) {
-      return JSON.parse(bets);
-    } else {
-      return [];
-    }
-  };
-  const getLocalStorageOdds = () => {
-    const odds = localStorage.getItem("odds");
-    if (odds) {
-      return JSON.parse(odds);
-    } else {
-      return [];
-    }
-  };
-  const getLocalStorageStake = () => {
-    const stake = localStorage.getItem("stake");
-    if (stake) {
-      return JSON.parse([stake]);
-    } else {
-      return [];
-    }
-  };
+  
+
   const initialState = {
-    info:false,
-    inProp:false,
+    info: false,
+    inProp: false,
     isModal: [],
     events: [],
     mainEvents: [],
     sports: [],
     placedBets: [],
-    odds: [],
+    odds: "",
+    newBalance: 0,
     openBets: {
-      placedEvents: getLocalStorageEvents(),
-      placedOdds: getLocalStorageOdds(),
-      placedStake: getLocalStorageStake(),
-      newBalance: 100,
+      placedEvents: [],
     },
-    counter: 0,
-    stake:0,
-    notEnough: false,
+    isDepositClicked: false,
+    stake: 0,
+    // notEnough: false,
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+ 
 
   const [isClicked, setIsClicked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -60,19 +37,28 @@ export const SportsProvider = ({ children }) => {
   const month = new Date().getMonth() + 1;
   const date = new Date().getDate();
 
-  // setting the event data to the localstorage
-  useEffect(() => {
-    localStorage.setItem("openBets", JSON.stringify(state.openBets.placedEvents));
-    localStorage.setItem("odds", JSON.stringify(state.openBets.placedOdds));
-    localStorage.setItem("stake", JSON.stringify(state.openBets.placedStake));
-    localStorage.setItem("balance", JSON.stringify(state.openBets.newBalance));
-  }, [
-    state.placedBets,
-    state.openBets.newBalance,
-    state.openBets.placedEvents,
-    state.openBets.placedOdds,
-    state.openBets.placedStake,
-  ]);
+  const openDepositModal = () => {
+    dispatch({ type: "OPEN_DEPOSIT" });
+  };
+  const depositHandler = async (deposit, id) => {
+    try {
+      const res = await fetch(`/api/v1/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          deposit,
+          user: id,
+        }),
+      });
+      const data = await res.json();
+      console.log(data.newDeposit);
+      // dispatch({type:'DEPOSIT',payload:data.newDeposit.deposit});
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // clearing open bets
   const clearOpenBets = () => {
@@ -83,7 +69,6 @@ export const SportsProvider = ({ children }) => {
   // opening the additional info of the past event
   const openModal = (i) => {
     dispatch({ type: "OPEN_PAST_EVENTS", payload: state.sports.data[i] });
-
   };
   // clearing the bet selection from the bet slip
   const clearSelections = () => {
@@ -92,12 +77,10 @@ export const SportsProvider = ({ children }) => {
 
   // increasing and decreasing the stake
   const decrease = () => {
-    dispatch({type: 'DEC'})
-    
+    dispatch({ type: "DEC" });
   };
   const increase = () => {
-      dispatch({type: 'INC'})
-    
+    dispatch({ type: "INC" });
   };
 
   // pagination functionality
@@ -128,11 +111,11 @@ export const SportsProvider = ({ children }) => {
           }
         );
         const data = await res.json();
+        console.log(data);
 
         dispatch({ type: "MAIN_EVENTS", payload: paginate(data.data) });
         dispatch({ type: "SET_EVENTS", payload: data });
         setLoading(false);
-
       } catch (err) {
         console.log(err);
       }
@@ -168,26 +151,43 @@ export const SportsProvider = ({ children }) => {
     fetchSports();
   }, [date, month, year]);
 
+  const cashOut = async (stake, id) => {
+    try {
+      const res = await fetch(`/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const data = res.json();
+      console.log(data);
+      dispatch({ type: "CASH_OUT", payload: stake });
+      dispatch({ type: "DEPOSIT", payload: stake });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // slider functionality
   const nextSlide = () => {
     setIndex((oldIndex) => {
-        let index = oldIndex + 1;
-        if (index > 10) {
-            index = 0;
-        }
+      let index = oldIndex + 1;
+      if (index > 10) {
+        index = 0;
+      }
 
-        return index;
+      return index;
     });
   };
   const prevSlide = () => {
     setIndex((oldIndex) => {
-        let index = oldIndex - 1;
-        if (index < 0) {
-            index = 10;
-        }
+      let index = oldIndex - 1;
+      if (index < 0) {
+        index = 10;
+      }
 
-        return index;
-    })
+      return index;
+    });
   };
 
   return (
@@ -197,40 +197,27 @@ export const SportsProvider = ({ children }) => {
         setNotEnough,
         listOfBets,
         setListOfBets,
-        // openBets,
-        // setOpenBets,
-        // placedBets,
-        // setPlacedBets,
-        // events,
         loading,
-        // stake,
         nextSlide,
         prevSlide,
         index,
         decrease,
         increase,
         clearSelections,
-        // sports,
         page,
         setPage,
-        // mainEvents,
-        // setOdds,
-        // odds,
-        // setInfo,
-        // info,
         openModal,
-        // isModal,
         clearOpenBets,
-        // inProp,
-        // setInProp,
         isClicked,
         setIsClicked,
         ...state,
         dispatch,
+        cashOut,
+        openDepositModal,
+        depositHandler,
       }}
     >
       {children}
     </SportContext.Provider>
   );
 };
-export default SportsProvider;
