@@ -1,6 +1,6 @@
 import React from 'react';
 import { GrClose } from "react-icons/gr";
-import { SportContext } from '../context';
+import { SportContext } from "../context/context";
 
 
 const Modal = ({isModal,show}) => {

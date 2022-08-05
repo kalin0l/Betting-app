@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Banner from './Banner'
-import { SportContext } from '../../context'
+import { SportContext } from '../../context/context'
+import { AuthContext } from '../../context/authContext';
 import Modal from '../Modal';
 import { Transition } from 'react-transition-group';
 import Tabs from '../Tabs';
@@ -9,7 +10,6 @@ import LiveEvents from '../LiveEvents';
 import PaginationBtns from '../PaginationBtns';
 import DepositModal from '../DepositModal';
 import { useCookies } from "react-cookie";
-import { AuthContext } from '../../authContext';
 
 
 

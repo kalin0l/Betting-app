@@ -1,6 +1,6 @@
 import { BiArrowFromRight } from "react-icons/bi";
 import { BiArrowFromLeft } from "react-icons/bi";
-import { SportContext } from "../../context";
+import { SportContext } from "../../context/context";
 import React from "react";
 import BannerEvents from "../BannerEvents";
 

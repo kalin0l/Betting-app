@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer } from "react";
-import reducer from "./reducer";
+import reducer from "../reducer";
 
 export const SportContext = React.createContext();
 

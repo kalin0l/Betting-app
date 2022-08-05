@@ -1,5 +1,5 @@
 import React from "react";
-import { SportContext } from "../context";
+import { SportContext } from "../context/context";
 
 const PastEvents = () => {
     const {isClicked,openModal,sports} = React.useContext(SportContext);

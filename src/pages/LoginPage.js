@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../authContext";
+import { AuthContext } from "../context/authContext";
 import Header from "../components/Header";
-import { SportContext } from "../context";
+import { SportContext } from "../context/context";
 import "./globalPage.css";
 
 const LoginPage = () => {

@@ -3,7 +3,7 @@ import Main from '../components/Main/Main'
 import Header from '../components/Header'
 import Aside from '../components/Aside'
 import Footer from '../components/Footer'
-import { SportContext } from '../context';
+import { SportContext } from "../context/context";
 
 
 const Home = () => {

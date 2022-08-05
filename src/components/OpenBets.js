@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { AuthContext } from "../authContext";
-import { SportContext } from "../context";
+import { AuthContext } from "../context/authContext";
+import { SportContext } from "../context/context";
 
 const OpenBets = () => {
   const { user } = React.useContext(AuthContext);

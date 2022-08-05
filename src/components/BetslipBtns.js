@@ -1,6 +1,6 @@
 import React from "react";
-import { SportContext } from "../context";
-import { AuthContext } from "../authContext";
+import { SportContext } from "../context/context";
+import { AuthContext } from "../context/authContext";
 
 const BetslipBtns = () => {
   const {
@@ -65,7 +65,7 @@ const BetslipBtns = () => {
           type="submit"
           onClick={() => addBet(placedBets.home_team.name,placedBets.away_team.name,placedBets.home_score.current,placedBets.away_score.current,stake,odds,user.userId)}
           disabled={
-            openBets.placedEvents.length >= 8 || newBalance < stake ? true : !user
+           newBalance < stake ? true : !user
           }
         >
           BET

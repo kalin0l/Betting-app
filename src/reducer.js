@@ -85,6 +85,9 @@ const reducer = (state, action) => {
   }
   if (action.type === "DEPOSIT") {
     const deposits = action.payload;
+    if(!deposits) {
+      return state;
+    }
     if (typeof deposits === "number") {
       return { ...state, newBalance: state.newBalance + deposits };
     }

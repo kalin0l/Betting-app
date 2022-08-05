@@ -1,7 +1,7 @@
-import { SportContext } from "../context";
+import { SportContext } from "../context/context";
+import { AuthContext } from "../context/authContext";
 import React, { useState } from "react";
 import { GrClose } from "react-icons/gr";
-import { AuthContext } from "../authContext";
 
 const DepositModal = () => {
     const {user} = React.useContext(AuthContext);

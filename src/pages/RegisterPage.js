@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../authContext";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 import Header from "../components/Header";
-import { SportContext } from "../context";
+import { SportContext } from "../context/context";
 import "./globalPage.css";
 
 const RegisterPage = () => {
@@ -30,10 +30,7 @@ const RegisterPage = () => {
     if (name !== '' && email.includes('@') && password.length > 5) {
       formIsValid = true;
     }
-    if(user){
-      
       formIsValid && !error ? history('/') : history('/api/v1/auth/register')
-    }
   };
   return (
     <>

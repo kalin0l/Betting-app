@@ -1,7 +1,7 @@
 import React from "react";
 import { FaReact } from "react-icons/fa";
-import { SportContext } from "../context";
-import { AuthContext } from "../authContext";
+import { SportContext } from "../context/context";
+import { AuthContext } from "../context/authContext";
 import {  useNavigate } from "react-router-dom";
 
 function Header() {

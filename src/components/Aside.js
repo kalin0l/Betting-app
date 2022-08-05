@@ -1,5 +1,5 @@
 import React from 'react';
-import { SportContext } from '../context'
+import { SportContext } from "../context/context";
 import BetslipTabs from './BetSlipTabs';
 import OpenBets from './OpenBets';
 import SelectedEvents from './SelectedEvents';
