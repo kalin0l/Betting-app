@@ -21,13 +21,11 @@ function Main() {
   
     const [cookies,setCookies] = useCookies();
     useEffect(() => {
-       console.log(cookies);
        dispatch({type:'SET_COOKIE', payload: cookies.accessToken})
        
     },[cookies,dispatch]);
 
     useEffect(() => {
-        console.log(user);
         localStorage.setItem("name", JSON.stringify(user));
     },[user])
 

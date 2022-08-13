@@ -1,16 +1,12 @@
 const reducer = (state, action) => {
-  if (action.type === "CLEAR_OPEN_BETS") {
-    return {
-      ...state,
-      counter: 0,
-      openBets: {
-        placedEvents: [],
-        placedOdds: [],
-        newBalance: 100,
-        placedStake: 0,
-      },
-    };
-  }
+  // if (action.type === "CLEAR_OPEN_BETS") {
+  //   return {
+  //     ...state,
+  //     openBets: {
+  //       placedEvents: [],
+  //     },
+  //   };
+  // }
   if (action.type === "OPEN_PAST_EVENTS") {
     return {
       ...state,

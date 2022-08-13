@@ -9,7 +9,7 @@ const RegisterPage = () => {
   const history = useNavigate();
 
   const { loading } = useContext(SportContext);
-  const { dispatch, email, password, name, register, error,user } =
+  const { dispatch, email, password, name, register, error } =
     useContext(AuthContext);
 
   const emailHandler = (e) => {

@@ -6,7 +6,6 @@ export const AuthContext = React.createContext();
 export const AuthProvider = ({children}) => {
  const getLocalStorageName = () => {
     const name = localStorage.getItem("name");
-    console.log(name);
     if (name) {
       return JSON.parse(name);
     } else {
@@ -25,11 +24,6 @@ export const AuthProvider = ({children}) => {
         error:''
     }
     const [state, dispatch] = useReducer(authReducer, initialState);
-    console.log(state.token);
-
-   
-   
-
    
 
     const register = async(name,email,password) => {
@@ -44,7 +38,12 @@ export const AuthProvider = ({children}) => {
                     name,email,password
                 })
             });
+            
             const data = await res.json();
+            if(!res.ok){
+                dispatch({type:'SET_ERROR',payload:data.message});
+                throw new Error(data);          
+            }
             console.log(data);
             dispatch({type:'REGISTER_USER',payload:data.user})
             dispatch({type:'LOADING'})
@@ -76,7 +75,6 @@ export const AuthProvider = ({children}) => {
             if(!res.ok){
                 dispatch({type:'SET_ERROR',payload:data.message});
                 throw new Error(data);          
-
             }
             history('/');
         } catch (error) {
@@ -96,7 +94,6 @@ export const AuthProvider = ({children}) => {
                 }
             })
             const data = await res.json();
-            console.log(data);
         } catch (error) {
             dispatch({type:'SET_ERROR',payload:error})
             console.log(error);

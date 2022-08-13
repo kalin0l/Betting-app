@@ -61,11 +61,10 @@ export const SportsProvider = ({ children }) => {
   };
 
   // clearing open bets
-  const clearOpenBets = () => {
-    localStorage.clear();
+  // const clearOpenBets = () => {
 
-    dispatch({ type: "CLEAR_OPEN_BETS" });
-  };
+  //   dispatch({ type: "CLEAR_OPEN_BETS" });
+  // };
   // opening the additional info of the past event
   const openModal = (i) => {
     dispatch({ type: "OPEN_PAST_EVENTS", payload: state.sports.data[i] });
@@ -111,7 +110,6 @@ export const SportsProvider = ({ children }) => {
           }
         );
         const data = await res.json();
-        console.log(data);
 
         dispatch({ type: "MAIN_EVENTS", payload: paginate(data.data) });
         dispatch({ type: "SET_EVENTS", payload: data });
@@ -207,7 +205,6 @@ export const SportsProvider = ({ children }) => {
         page,
         setPage,
         openModal,
-        clearOpenBets,
         isClicked,
         setIsClicked,
         ...state,

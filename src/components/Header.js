@@ -16,6 +16,7 @@ function Header() {
         history('/api/v1/auth/login');
 
       }
+      localStorage.clear();
     }
 
 

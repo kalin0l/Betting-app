@@ -6,7 +6,6 @@ const BetslipBtns = () => {
   const {
     increase,
     decrease,
-    openBets,
     stake,
     placedBets,
     listOfBets,
@@ -53,7 +52,7 @@ const BetslipBtns = () => {
         {stake < 0 ? (
           <input type="text" value={0} />
         ) : (
-          <input type="text" value={stake} />
+          <input type="text" readOnly value={stake} />
         )}
         <button type="submit" className="btn" onClick={increase}>
           +
