@@ -13,7 +13,8 @@ const OpenBets = () => {
       try {
         const res = await fetch(`/${user.userId}`);
         const data = await res.json();
-        dispatch({ type: "ADD_BET_TO_OPEN_BETS", payload: data.bets });
+        console.log(data);
+        dispatch({ type: "ADD_BET_TO_OPEN_BETS", payload: data.docs });
       } catch (error) {
         console.log(error);
       }
@@ -26,7 +27,8 @@ const OpenBets = () => {
       try {
         const res = await fetch(`api/v1/${user.userId}`);
         const data = await res.json();
-        dispatch({type:'DEPOSIT',payload:data.deposits});
+        
+        dispatch({type:'DEPOSIT',payload:data.docs});
       } catch (error) {
         console.log(error);
         
