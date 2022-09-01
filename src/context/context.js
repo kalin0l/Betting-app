@@ -159,7 +159,6 @@ export const SportsProvider = ({ children }) => {
       });
       const data = res.json();
       console.log(data);
-      dispatch({ type: "CASH_OUT", payload: stake });
       dispatch({ type: "DEPOSIT", payload: stake });
     } catch (error) {
       console.log(error);

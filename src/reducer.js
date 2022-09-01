@@ -73,23 +73,24 @@ const reducer = (state, action) => {
   if (action.type === "BANNER_EVENTS") {
     return { ...state, placedBets: action.payload };
   }
-  if (action.type === "CASH_OUT") {
-    return { ...state, newBalance: state.newBalance + action.payload };
-  }
+  
   if (action.type === "OPEN_DEPOSIT") {
     return { ...state, isDepositClicked: !state.isDepositClicked };
   }
   if (action.type === "DEPOSIT") {
     const deposits = action.payload;
+    console.log(deposits);
     if(!deposits) {
       return state;
     }
     if (typeof deposits === "number") {
+      console.log(state);
       return { ...state, newBalance: state.newBalance + deposits };
-    }
-    return {
-      ...state,
-      newBalance: deposits.reduce((acc, cur) => acc + cur.deposit, 0),
+    } 
+      return {
+        ...state,
+        newBalance: deposits.reduce((acc, cur) => acc + cur.deposit, 0),
+
     };
   }
   // if (action.type === "CLEAR_BET") {
