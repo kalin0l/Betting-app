@@ -10,7 +10,7 @@ const DepositModal = () => {
   const closingModal = () => {
     dispatch({ type: "OPEN_DEPOSIT" });
   };
- 
+  
   
   return (
     <div className={`${isDepositClicked ? " deposit-modal openModal" : "closeModal"}`}>

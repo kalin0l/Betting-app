@@ -4,7 +4,7 @@ import { SportContext } from "../context/context";
 
 const OpenBets = () => {
   const { user } = React.useContext(AuthContext);
-  const { listOfBets, openBets, dispatch,newBalance,cashOut,placedBets } =
+  const { listOfBets, openBets, dispatch,newBalance,cashOut } =
     React.useContext(SportContext);
 
   useEffect(() => {
@@ -13,7 +13,6 @@ const OpenBets = () => {
       try {
         const res = await fetch(`/${user.userId}`);
         const data = await res.json();
-        console.log(data);
         dispatch({ type: "ADD_BET_TO_OPEN_BETS", payload: data.docs });
       } catch (error) {
         console.log(error);
@@ -22,20 +21,7 @@ const OpenBets = () => {
     getAllOpenBets(user);
   }, [user, dispatch,newBalance]);
 
-  useEffect(() => {
-    const getAllDeposits = async (user) => {
-      try {
-        const res = await fetch(`api/v1/${user.userId}`);
-        const data = await res.json();
-        
-        dispatch({type:'DEPOSIT',payload:data.docs});
-      } catch (error) {
-        console.log(error);
-        
-      }
-    }
-    getAllDeposits(user);
-  },[dispatch,user,placedBets])
+  
   return (
     <>
       {listOfBets &&
@@ -58,7 +44,7 @@ const OpenBets = () => {
                 <span>Return:{(item.stake * item.selection).toFixed(2)}$</span>
               </div>
               <div className="cash-out-btn">
-                <button className="bet-btn" type="button" onClick={() => cashOut(stake,item._id)}>Cash out {item.stake * 0.9}$</button>
+                <button className="bet-btn" type="button" onClick={() => cashOut(stake,user.userId,item._id)}>Cash out {item.stake * 0.9}$</button>
               </div>
             </div>
           );
