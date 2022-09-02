@@ -53,9 +53,6 @@ const LoginPage = () => {
             onChange={(e) => passwordHandler(e)}
             className={`${error ? "invalid" : null}`}
           />
-          <Link to="/api/users/forgotPassword" className="forgot-pw">
-            Forgot your password?
-          </Link>
         </label>
         {loading && <button className="form-btn">Loading...</button>}
 
