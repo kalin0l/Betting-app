@@ -26,11 +26,7 @@ const RegisterPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    let formIsValid;
-    if (name !== '' && email.includes('@') && password.length > 5) {
-      formIsValid = true;
-    }
-      formIsValid && !error ? history('/') : history('/api/v1/auth/register')
+    
   };
   return (
     <>

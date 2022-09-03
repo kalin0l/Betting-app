@@ -23,11 +23,8 @@ const LoginPage = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     let formIsValid = false;
-    if (email.includes('@') && password.length > 5) {
-      formIsValid = true;
-    }
+  
       login(email,password,history)
-      formIsValid && !error ? history('/') : history('/api/v1/auth/login')
     
   };
 

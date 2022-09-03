@@ -40,6 +40,7 @@ export const AuthProvider = ({children}) => {
             });
             
             const data = await res.json();
+            console.log(data.message);
             if(!res.ok){
                 dispatch({type:'SET_ERROR',payload:data.message});
                 throw new Error(data);          
@@ -51,7 +52,6 @@ export const AuthProvider = ({children}) => {
             
         } catch (error) {
             console.log(error);
-            dispatch({type:'SET_ERROR',payload:error})
             dispatch({type:'LOADING'})
         }
 
@@ -79,7 +79,6 @@ export const AuthProvider = ({children}) => {
             history('/');
         } catch (error) {
             console.log(error);
-            dispatch({type:'SET_ERROR',payload:error})
             dispatch({type:'LOADING'})
             
         }
