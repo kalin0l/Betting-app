@@ -152,18 +152,6 @@ export const SportsProvider = ({ children }) => {
   const cashOut = async (stake,userId, id) => {
     console.log(id,userId);
     try {
-      const depositRes = await fetch(`/api/v1/${userId}`,{
-        method:'POST',
-        headers:{
-          "Content-type":"application/json"
-      },
-      body:JSON.stringify({
-        deposit:stake,
-        user:userId
-      })
-      });
-      const depositData = await depositRes.json();
-
       const res = await fetch(`/${id}`, {
         method: "DELETE",
         headers: {
@@ -171,7 +159,7 @@ export const SportsProvider = ({ children }) => {
         },
       });
       const data = res.json();
-      console.log(data,depositData);
+      console.log(data);
       dispatch({ type: "DEPOSIT", payload: stake });
     } catch (error) {
       console.log(error);
