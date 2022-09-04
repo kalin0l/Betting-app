@@ -24,6 +24,24 @@ const Home = () => {
       }
       getAllDeposits(user);
     },[dispatch,user,isDepositClicked])
+    useEffect(() => {
+       
+      const getAllBets = async()=>{
+          try{
+              const res = await fetch(`/${user.userId}`);
+              const data = await res.json();
+              console.log(data.docs);
+              if(!res.ok){
+                  throw new Error(data.message);
+              }
+              dispatch({type:'WITHDRAW_FROM_BALANCE',payload:data.docs})
+          }catch(err){
+              console.log(err);
+          }
+        
+      }
+      getAllBets();
+  },[dispatch,isDepositClicked,user])
    
 
     return <>

@@ -18,12 +18,13 @@ function Main() {
 
     const { info, isModal,inProp,isDepositClicked } = React.useContext(SportContext);
     const { dispatch,user } = React.useContext(AuthContext);
-  
+    
     const [cookies,setCookies] = useCookies();
     useEffect(() => {
        dispatch({type:'SET_COOKIE', payload: cookies.accessToken})
        
     },[cookies,dispatch]);
+   
 
     useEffect(() => {
         localStorage.setItem("name", JSON.stringify(user));

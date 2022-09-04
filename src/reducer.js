@@ -77,6 +77,14 @@ const reducer = (state, action) => {
   if (action.type === "OPEN_DEPOSIT") {
     return { ...state, isDepositClicked: !state.isDepositClicked };
   }
+  if(action.type === 'WITHDRAW_FROM_BALANCE'){
+    const payload = action.payload;
+    console.log(payload);
+    const sumOfStakes = payload.reduce((acc,cur) => acc + cur.stake,0)
+    console.log(sumOfStakes);
+
+    return {...state,newBalance:state.newBalance - sumOfStakes}
+  }
   if (action.type === "DEPOSIT") {
     const deposits = action.payload;
     if(!deposits) {
@@ -90,7 +98,9 @@ const reducer = (state, action) => {
         newBalance: deposits.reduce((acc, cur) => acc + cur.deposit, 0),
 
     };
+   
   }
+  
   // if (action.type === "CLEAR_BET") {
   //   const id = action.payload;
   //   const event = state.openBets.placedEvents.filter((ev) => ev._id !== id);
